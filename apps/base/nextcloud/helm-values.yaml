@@ -23,8 +23,8 @@ replicaCount: 1
 ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ##
 ingress:
-  enabled: false
-  # className: nginx
+  enabled: true
+  className: traefik
   annotations: {}
   #  nginx.ingress.kubernetes.io/proxy-body-size: 4G
   #  kubernetes.io/tls-acme: "true"
@@ -74,7 +74,7 @@ phpClientHttpsFix:
   protocol: https
 
 nextcloud:
-  host: nextcloud.kube.home
+  host: nextcloud.homelab.damianwasik.pl
   username: admin
   password: changeme
   ## Use an existing secret
@@ -94,7 +94,7 @@ nextcloud:
   persistence:
     subPath:
   # if set, we'll template this list to the NEXTCLOUD_TRUSTED_DOMAINS env var
-  trustedDomains: ['nextcloud.kube.home', '192.168.50.2']
+  trustedDomains: ['homelab.damianwasik.pl']
   ## SMTP configuration
   mail:
     enabled: false
