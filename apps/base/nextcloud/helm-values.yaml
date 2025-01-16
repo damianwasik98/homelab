@@ -25,7 +25,11 @@ replicaCount: 1
 ingress:
   enabled: true
   className: traefik
-  annotations: {}
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: nextcloud.png
+    gethomepage.dev/name: NextCloud
   #  nginx.ingress.kubernetes.io/proxy-body-size: 4G
   #  kubernetes.io/tls-acme: "true"
   #  cert-manager.io/cluster-issuer: letsencrypt-prod
