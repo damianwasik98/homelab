@@ -1,0 +1,12 @@
+# /etc/fstab file for machine hosting main storage
+
+# Parity
+UUID=6796-09F0  /mnt/parity1    exfat   defaults        0       0
+
+# Data
+UUID=6796-0A92  /mnt/data1      exfat   defaults        0       0
+UUID=6796-095C  /mnt/data2      exfat   defaults        0       0
+
+# MergerFS
+/mnt/data*      /mnt/storage    mergerfs        defaults,config=/etc/mergerfs/config/media.ini  0       0
+
