@@ -596,7 +596,7 @@ service:
 ##
 persistence:
   # Nextcloud Data (/var/www/html)
-  enabled: false
+  enabled: true
   annotations: {}
   ## nextcloud data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
@@ -618,13 +618,13 @@ persistence:
   ## Use an additional pvc for the data directory rather than a subpath of the default PVC
   ## Useful to store data on a different storageClass (e.g. on slower disks)
   nextcloudData:
-    enabled: false
-    subPath:
+    enabled: true
+    subPath: ""
     annotations: {}
     # storageClass: "-"
-    # existingClaim:
+    existingClaim: "nextcloud-user-data"
     accessMode: ReadWriteOnce
-    size: 8Gi
+    # size: 6Ti
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
