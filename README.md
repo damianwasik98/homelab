@@ -3,6 +3,9 @@ My own self-hosted developer playground where I learn new things.
 
 In this repo I store configuration of my Kubernetes cluster hosted in my home network.
 
+## Repo structure
+I use monorepo approach suggested in [FluxCD docs](https://fluxcd.io/flux/guides/repository-structure/#monorepo).
+
 ## Architecture
 I started small. For now it is single node k3s cluster, but I have plans to add another nodes in the future when my needs expand. 
 
