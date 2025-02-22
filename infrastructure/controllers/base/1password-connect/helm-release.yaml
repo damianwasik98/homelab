@@ -15,6 +15,5 @@ spec:
         namespace: 1password-connect
   values:
     connect:
-      credentials:
-        existingSecret: "1password-connect-credentials"
-        secretKey: "1password-credentials.json"
+      credentialsName: "1password-connect-credentials"
+      credentailsKey: "1password-credentials.json"
