@@ -17,3 +17,7 @@ spec:
     connect:
       credentialsName: "1password-connect-credentials"
       credentailsKey: "1password-credentials.json"
+    operator:
+      create: true
+      token:
+        name: 1password-token
