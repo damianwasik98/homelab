@@ -22,6 +22,11 @@ spec:
           env:
             - name: PGDATA
               value: "/var/lib/postgresql/data/pgdata"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: password
           envFrom:
             - secretRef:
                 name: postgres-secrets
