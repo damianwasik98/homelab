@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: 1password-connect
 resources:
   - ../../base/1password-connect/
+  - credentials-file-secret.yaml
