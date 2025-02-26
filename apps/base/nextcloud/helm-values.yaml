@@ -66,10 +66,10 @@ ingress:
   path: /
   pathType: Prefix
 
-
 # Allow configuration of lifecycle hooks
 # ref: https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/
-lifecycle: {}
+lifecycle:
+  {}
   # postStartCommand: []
   # preStopCommand: []
 
@@ -98,7 +98,7 @@ nextcloud:
   persistence:
     subPath:
   # if set, we'll template this list to the NEXTCLOUD_TRUSTED_DOMAINS env var
-  trustedDomains: ['nextcloud.damianwasik.pl', '192.168.50.2']
+  trustedDomains: ["nextcloud.damianwasik.pl", "192.168.50.2"]
   ## SMTP configuration
   mail:
     enabled: false
@@ -321,7 +321,6 @@ nextcloud:
     # Set postgresql initContainer securityContext parameters. For example, you may need to define runAsNonRoot directive
     securityContext: {}
 
-
 nginx:
   ## You need to set an fpm version of the image for nextcloud if you want to use nginx!
   enabled: false
@@ -377,38 +376,38 @@ nginx:
   #    value: ENV_VALUE
 
 internalDatabase:
-  enabled: true
+  enabled: false
   name: nextcloud
 
 ##
 ## External database configuration
 ##
 externalDatabase:
-  enabled: false
+  enabled: true
 
   ## Supported database engines: mysql or postgresql
-  type: mysql
+  type: postgresql
 
   ## Database host. You can optionally include a colon delimited port like "myhost:1234"
-  host: ""
+  host: "postgres.postgres"
 
   ## Database user
-  user: nextcloud
+  user: ""
 
   ## Database password
   password: ""
 
   ## Database name
-  database: nextcloud
+  database: ""
 
   ## Use a existing secret
   existingSecret:
-    enabled: false
-    # secretName: nameofsecret
-    usernameKey: db-username
-    passwordKey: db-password
+    enabled: true
+    secretName: postgres-credentials
+    usernameKey: username
+    passwordKey: password
     # hostKey: db-hostname-or-ip
-    # databaseKey: db-name
+    databaseKey: database
 
 ##
 ## MariaDB chart configuration
@@ -486,7 +485,7 @@ redis:
   enabled: false
   auth:
     enabled: true
-    password: 'changeme'
+    password: "changeme"
     # name of an existing secret with Redis® credentials (instead of auth.password), must be created ahead of time
     existingSecret: ""
     # Password key to be retrieved from existing secret
@@ -549,8 +548,8 @@ collabora:
     hosts:
       - host: chart-example.local
         paths:
-        - path: /
-          pathType: ImplementationSpecific
+          - path: /
+            pathType: ImplementationSpecific
     tls: []
     #  - secretName: collabora-ingress-tls
     #    hosts:
@@ -558,7 +557,6 @@ collabora:
 
   # see collabora helm README.md for recommended values
   resources: {}
-
 
 ## Cronjob to execute Nextcloud background tasks
 ## ref: https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/background_jobs_configuration.html#cron
@@ -573,7 +571,8 @@ cronjob:
 
   # Allow configuration of lifecycle hooks
   # ref: https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/
-  lifecycle: {}
+  lifecycle:
+    {}
     # postStartCommand: []
     # preStopCommand: []
   # Set securityContext parameters. For example, you may need to define runAsNonRoot directive
@@ -626,7 +625,8 @@ persistence:
     accessMode: ReadWriteOnce
     # size: 6Ti
 
-resources: {}
+resources:
+  {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -662,7 +662,6 @@ startupProbe:
   timeoutSeconds: 5
   failureThreshold: 30
   successThreshold: 1
-
 
 ## Enable pod autoscaling using HorizontalPodAutoscaler
 ## ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
@@ -858,14 +857,12 @@ metrics:
     ##
     labels: {}
 
-
 rbac:
   enabled: false
   serviceaccount:
     create: true
     name: nextcloud-serviceaccount
     annotations: {}
-
 
 ## @param securityContext for nextcloud pod @deprecated Use `nextcloud.podSecurityContext` instead
 securityContext: {}

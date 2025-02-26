@@ -4,6 +4,7 @@ namespace: nextcloud
 resources:
   - helm-repository.yaml
   - helm-release.yaml
+  - onepassworditem.yaml
 configMapGenerator:
   - name: nextcloud-helm-values
     namespace: nextcloud
@@ -11,4 +12,3 @@ configMapGenerator:
       - values.yaml=helm-values.yaml
 generatorOptions:
   disableNameSuffixHash: true
-
